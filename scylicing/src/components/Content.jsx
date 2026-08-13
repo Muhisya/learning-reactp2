@@ -11,6 +11,7 @@ const Contents = [
     id: 1,
     duration: "23:45",
     avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop",
+    link: "",
     title: "Lorem ipsum dolor sit amet, consecte adipiscing elit.",
     author: "James Gouse",
     views: "15K",
