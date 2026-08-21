@@ -5,17 +5,36 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
     
+    let currentErrors = {};
+
+    if (!email) currentErrors.email = "Email Address wajib diisi!";
+    if (!username) currentErrors.username = "Username wajib diisi!";
+    
+    if (!password) {
+      currentErrors.password = "Password wajib diisi!";
+    } else if (password.length < 8) {
+      currentErrors.password = "Password harus minimal 8 digit!";
+    }
+
+    if (Object.keys(currentErrors).length > 0) {
+      setErrors(currentErrors);
+      return;
+    }
+
+    setErrors({});
+
     console.log("Email Address:", email);
     console.log("Username:", username);
     console.log("Password:", password);
 
-    setLoading(true);
+    setLoading(true); 
     setTimeout(() => {
       setLoading(false);
       setSubmitted(true);
@@ -72,15 +91,29 @@ export default function SignUp() {
                 <label className="block text-sm font-medium text-slate-700 mb-1.5 pl-1">
                   Email Address
                 </label>
-                <input type="email" value={email} placeholder="Enter your Email Address" onChange={(e) => setEmail(e.target.value)} className="w-full rounded-full px-5 py-3 text-sm outline-none border border-blue-900/40 bg-white text-slate-900 placeholder:text-slate-300 focus:border-blue-950 focus:ring-1 focus:ring-blue-950"
+                <input 
+                  type="email" 
+                  value={email} 
+                  placeholder="Enter your Email Address" 
+                  onChange={(e) => setEmail(e.target.value)} 
+                  className={`w-full rounded-full px-5 py-3 text-sm outline-none border bg-white text-slate-900 placeholder:text-slate-300 focus:ring-1 ${errors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-blue-900/40 focus:border-blue-950 focus:ring-blue-950'}`}
                 />
+                {errors.email && <p className="text-xs text-red-500 mt-1 pl-3">{errors.email}</p>}
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1.5 pl-1">
                   Username
                 </label>
-                <input type="text" value={username} placeholder="Enter your User name" onChange={(e) => setUsername(e.target.value)} className="w-full rounded-full px-5 py-3 text-sm outline-none border border-blue-900/40 bg-white text-slate-900 placeholder:text-slate-300 focus:border-blue-950 focus:ring-1 focus:ring-blue-950"/>
+                <input 
+                  type="text" 
+                  value={username} 
+                  placeholder="Enter your User name" 
+                  onChange={(e) => setUsername(e.target.value)} 
+                  className={`w-full rounded-full px-5 py-3 text-sm outline-none border bg-white text-slate-900 placeholder:text-slate-300 focus:ring-1 ${errors.username ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-blue-900/40 focus:border-blue-950 focus:ring-blue-950'}`}
+                />
+                {errors.username && <p className="text-xs text-red-500 mt-1 pl-3">{errors.username}</p>}
+                {username && <p className="text-xs text-slate-500 mt-1 pl-3 break-all">Your username: {username}</p>}
               </div>
 
               <div>
@@ -88,7 +121,14 @@ export default function SignUp() {
                   Password
                 </label>
                 <div className="relative">
-                  <input type="password" value={password} placeholder="Enter your Password" autoComplete="new-password" onChange={(e) => setPassword(e.target.value)} className="w-full rounded-full px-5 py-3 pr-12 text-sm outline-none border border-blue-900/40 bg-white text-slate-900 placeholder:text-slate-300 focus:border-blue-950 focus:ring-1 focus:ring-blue-950"/>
+                  <input 
+                    type="password" 
+                    value={password} 
+                    placeholder="Enter your Password" 
+                    autoComplete="new-password" 
+                    onChange={(e) => setPassword(e.target.value)} 
+                    className={`w-full rounded-full px-5 py-3 pr-12 text-sm outline-none border bg-white text-slate-900 placeholder:text-slate-300 focus:ring-1 ${errors.password ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-blue-900/40 focus:border-blue-950 focus:ring-blue-950'}`}
+                  />
                   <button type="button" className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
@@ -96,11 +136,13 @@ export default function SignUp() {
                     </svg>
                   </button>
                 </div>
+                {errors.password && <p className="text-xs text-red-500 mt-1 pl-3">{errors.password}</p>}
+                {password && <p className="text-xs text-slate-500 mt-1 pl-3 break-all">Your password: {password}</p>}
               </div>
 
               <div className="pt-2 flex justify-end">
                 <button type="submit" disabled={loading} className="w-full sm:w-auto min-w-[160px] rounded-full py-3 px-8 text-sm font-medium transition-all bg-blue-950 text-white hover:bg-blue-900 disabled:opacity-70 disabled:cursor-not-allowed">
-                  {loading ? "Registering..." : "Register"}
+                  {loading ? "Registering..." : "Sign Up"}
                 </button>
               </div>
             </form>
