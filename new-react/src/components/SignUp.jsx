@@ -108,7 +108,7 @@ export default function SignUp() {
                 <input 
                   type="text" 
                   value={username} 
-                  placeholder="Enter your User name" 
+                  placeholder="Enter your Username" 
                   onChange={(e) => setUsername(e.target.value)} 
                   className={`w-full rounded-full px-5 py-3 text-sm outline-none border bg-white text-slate-900 placeholder:text-slate-300 focus:ring-1 ${errors.username ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-blue-900/40 focus:border-blue-950 focus:ring-blue-950'}`}
                 />
@@ -124,7 +124,7 @@ export default function SignUp() {
                   <input 
                     type="password" 
                     value={password} 
-                    placeholder="Enter your Password" 
+                    placeholder="Password (minimum 8 characters)" 
                     autoComplete="new-password" 
                     onChange={(e) => setPassword(e.target.value)} 
                     className={`w-full rounded-full px-5 py-3 pr-12 text-sm outline-none border bg-white text-slate-900 placeholder:text-slate-300 focus:ring-1 ${errors.password ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-blue-900/40 focus:border-blue-950 focus:ring-blue-950'}`}
