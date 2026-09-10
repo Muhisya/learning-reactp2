@@ -1,19 +1,13 @@
-// src/router.jsx
 import { createBrowserRouter } from "react-router";
-import AppUseContext from "./AppUseContext"; // Import tugas
-import ProfileDetails from "./using-usecontext/ProfileDetails";
+import Example from "./learn-reducer/Example";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     children: [
       {
-        path: "",
-        element: <AppUseContext />, // Langsung tampilin tugas di home
-      },
-      {
-        path: "profile",
-        element: <ProfileDetails />,
+        path: "example",
+        element: <Example />,
       },
     ],
   },
